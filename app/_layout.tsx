@@ -9,7 +9,7 @@ import { useFonts } from "expo-font";
 import { Slot, SplashScreen, Stack, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
-import * as SecureStore from "expo-secure-store";
+import { tokenCache } from "../components/utils/auth";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 export {
@@ -48,23 +48,6 @@ export default function RootLayout() {
 
   return <RootLayoutNav />;
 }
-
-const tokenCache = {
-  async getToken(key: string) {
-    try {
-      return SecureStore.getItemAsync(key);
-    } catch (e) {
-      console.log(e);
-    }
-  },
-  async saveToken(key: string, value: string) {
-    try {
-      return SecureStore.setItemAsync(key, value);
-    } catch (e) {
-      console.log(e);
-    }
-  },
-};
 
 const InitialLayout = () => {
   const { isLoaded, isSignedIn } = useAuth();
