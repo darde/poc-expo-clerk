@@ -2,11 +2,11 @@ import React from "react";
 import * as WebBrowser from "expo-web-browser";
 import { Button } from "react-native";
 import { useOAuth } from "@clerk/clerk-expo";
-import { useWarmUpBrowser } from "../../components/hooks/warmUpBrowser";
+import { useWarmUpBrowser } from "./hooks/warmUpBrowser";
 
 WebBrowser.maybeCompleteAuthSession();
 
-const SignInWithOAuth = () => {
+const GoogleOAuth = () => {
   // Warm up the android browser to improve UX
   // https://docs.expo.dev/guides/authentication/#improving-user-experience
   useWarmUpBrowser();
@@ -28,6 +28,6 @@ const SignInWithOAuth = () => {
     }
   }, []);
 
-  return <Button title="Sign in with Google" onPress={onPress} />;
+  return <Button title="Sign in with Google!!" onPress={onPress} />;
 };
-export default SignInWithOAuth;
+export default GoogleOAuth;

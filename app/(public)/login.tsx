@@ -1,6 +1,6 @@
 import { useSignIn } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   StyleSheet,
@@ -11,6 +11,7 @@ import {
   Alert,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
+import GoogleOAuth from "../../components/GoogleOAuth";
 
 const Login = () => {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -70,6 +71,11 @@ const Login = () => {
           <Text>Create Account</Text>
         </Pressable>
       </Link>
+
+      <View>
+        <Text>Or continue with</Text>
+        <GoogleOAuth />
+      </View>
     </View>
   );
 };

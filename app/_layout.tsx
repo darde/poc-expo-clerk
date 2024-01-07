@@ -64,7 +64,7 @@ const InitialLayout = () => {
     if (isSignedIn && !inTabsGroup) {
       router.replace("/home");
     } else if (!isSignedIn) {
-      router.replace("/social");
+      router.replace("/login");
     }
   }, [isSignedIn]);
 

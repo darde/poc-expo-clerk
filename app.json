@@ -4,11 +4,11 @@
     "slug": "she-matters",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/icon-shematters.png",
     "scheme": "com.remedypointsolutions.shematters",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/splash-shematters.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
