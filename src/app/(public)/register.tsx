@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import { useSignUp } from "@clerk/clerk-expo";
 import { Stack } from "expo-router";
 import Spinner from "react-native-loading-spinner-overlay";
+import { InputField, SMButton, SMLink } from "@/components/shared";
 
 const register = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
 
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordVerification, setPasswordVerification] = useState("");
+  const [error, setError] = useState("");
   const [pendingVerification, setPendingVerification] = useState(false);
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
@@ -54,52 +57,75 @@ const register = () => {
     }
   };
 
+  const checkPasswordMatch = () => {
+    if (emailAddress === "") {
+      setError("Please, provide a valid email");
+      return;
+    }
+    if (password === "") {
+      setError("Please, provide a valid password");
+      return;
+    }
+    if (password !== passwordVerification) {
+      setError("The passwords don't match");
+      return;
+    }
+    setError("");
+    onSignUpPress();
+  };
+
   return (
     <View style={styles.container}>
       <Stack.Screen options={{ headerBackVisible: !pendingVerification }} />
       <Spinner visible={loading} />
 
       {!pendingVerification && (
-        <>
-          <TextInput
-            autoCapitalize="none"
-            placeholder="simon@galaxies.dev"
-            value={emailAddress}
-            onChangeText={setEmailAddress}
-            style={styles.inputField}
-          />
-          <TextInput
-            placeholder="password"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            style={styles.inputField}
-          />
-
-          <Button
-            onPress={onSignUpPress}
-            title="Sign up"
-            color={"#6c47ff"}
-          ></Button>
-        </>
+        <View style={styles.form}>
+          <View style={styles.fields}>
+            <InputField
+              placeholder="Type your best email"
+              handleOnChange={setEmailAddress}
+              value={emailAddress}
+              label="Email"
+            />
+            <InputField
+              placeholder="Type a password"
+              handleOnChange={setPassword}
+              value={password}
+              label="Password"
+              secureTextEntry
+            />
+            <InputField
+              placeholder="Repeat the password"
+              handleOnChange={setPasswordVerification}
+              value={passwordVerification}
+              label="Confirm the password"
+              secureTextEntry
+            />
+          </View>
+          <View style={styles.bottom}>
+            {error && <Text style={styles.error}>{error}</Text>}
+            <SMButton
+              // onPress={onSignUpPress}
+              onPress={checkPasswordMatch}
+              label="Sign up"
+              backgroundColor="#6D31ED"
+              color="#fff"
+            />
+          </View>
+        </View>
       )}
 
       {pendingVerification && (
-        <>
-          <View>
-            <TextInput
-              value={code}
-              placeholder="Code..."
-              style={styles.inputField}
-              onChangeText={setCode}
-            />
-          </View>
-          <Button
-            onPress={onPressVerify}
-            title="Verify Email"
-            color={"#6c47ff"}
-          ></Button>
-        </>
+        <View>
+          <InputField
+            placeholder="Type your code"
+            handleOnChange={setCode}
+            value={code}
+            label="Verification code"
+          />
+          <SMLink label="Verify email" onPress={onPressVerify} />
+        </View>
       )}
     </View>
   );
@@ -110,19 +136,23 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 20,
-  },
-  inputField: {
-    marginVertical: 4,
-    height: 50,
-    borderWidth: 1,
-    borderColor: "#6c47ff",
-    borderRadius: 4,
-    padding: 10,
     backgroundColor: "#fff",
   },
-  button: {
-    margin: 8,
+  fields: {
+    justifyContent: "flex-start",
+    gap: 18,
+  },
+  form: {
+    justifyContent: "flex-start",
+    gap: 32,
+  },
+  error: {
+    color: "#DB4437",
+    fontSize: 16,
+  },
+  bottom: {
     alignItems: "center",
+    gap: 15,
   },
 });
 

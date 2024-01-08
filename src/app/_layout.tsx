@@ -30,6 +30,8 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
+    InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf"),
     ...FontAwesome.font,
   });
 
@@ -61,13 +63,11 @@ const InitialLayout = () => {
     console.log({ isSignedIn });
     if (!isLoaded) return;
 
-    let publicRoute = "/welcome";
-
     const checkWelcomeStep = async () => {
       const gotWelcome = await Storage.getItem("GOT_WELCOME");
       if (gotWelcome) {
-        // router.replace("/login"); // uncoment this after development
-        router.replace("/welcome"); // for development pourpose
+        router.replace("/login"); // uncoment this after development
+        // router.replace("/welcome"); // for development pourpose
       } else {
         await Storage.saveItem("GOT_WELCOME", "true");
         router.replace("/welcome");

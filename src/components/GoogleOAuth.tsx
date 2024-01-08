@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import * as WebBrowser from "expo-web-browser";
 import { Button } from "react-native";
+import { SMButton } from "./shared";
 import { useOAuth } from "@clerk/clerk-expo";
 import { useWarmUpBrowser } from "./hooks/warmUpBrowser";
 
@@ -13,7 +14,7 @@ const GoogleOAuth = () => {
 
   const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
 
-  const onPress = React.useCallback(async () => {
+  const handleOnPress = useCallback(async () => {
     try {
       const { createdSessionId, signIn, signUp, setActive } =
         await startOAuthFlow();
@@ -28,6 +29,14 @@ const GoogleOAuth = () => {
     }
   }, []);
 
-  return <Button title="Sign in with Google!!" onPress={onPress} />;
+  return (
+    <SMButton
+      label="Continue with Google"
+      onPress={handleOnPress}
+      backgroundColor="#DB4437"
+      color="#fff"
+    />
+  );
+  // return <Button title="Sign in with Google!!" onPress={onPress} />;
 };
 export default GoogleOAuth;

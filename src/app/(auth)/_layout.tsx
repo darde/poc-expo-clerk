@@ -32,7 +32,7 @@ const TabsPage = () => {
       <Tabs.Screen
         name="home"
         options={{
-          headerTitle: "Home",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home-outline" size={size} color={color} />
           ),

@@ -1,8 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import React from "react";
-import PrimaryButton from "@/components/shared/PrimaryButton";
-import Link from "@/components/shared/Link";
+import { SMButton, SMLink } from "@/components/shared";
 import { router } from "expo-router";
 
 const TermsAndPrivacyPolicy = () => {
@@ -21,8 +20,8 @@ const TermsAndPrivacyPolicy = () => {
           processing of my personal health data.
         </Text>
       </View>
-      <PrimaryButton label="Agree" onPress={handleOnPress} />
-      <Link label="Decline" onPress={() => {}} />
+      <SMButton onPress={handleOnPress} label="Agree" />
+      <SMLink onPress={() => {}} label="Decline" />
     </View>
   );
 };
