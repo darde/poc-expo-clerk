@@ -5,11 +5,13 @@ import {
   DefaultTheme,
   ThemeProvider,
 } from "@react-navigation/native";
+import config from "../../tamagui.config";
 import { useFonts } from "expo-font";
 import { Slot, SplashScreen, Stack, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import { Storage, tokenCache } from "@/components/utils";
+import TamaguiProvider from "@/components/providers/TamaguiProvider";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 export {
@@ -92,8 +94,10 @@ function RootLayoutNav() {
       publishableKey={CLERK_PUBLISHABLE_KEY!}
       tokenCache={tokenCache}
     >
-      {/* <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
-      <InitialLayout />
+      <TamaguiProvider>
+        {/* <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
+        <InitialLayout />
+      </TamaguiProvider>
       {/* </ThemeProvider> */}
     </ClerkProvider>
   );

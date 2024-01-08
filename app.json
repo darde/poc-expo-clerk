@@ -4,11 +4,11 @@
     "slug": "she-matters",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon-shematters.png",
+    "icon": "./src/assets/images/icon-shematters.png",
     "scheme": "com.remedypointsolutions.shematters",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash-shematters.png",
+      "image": "./src/assets/images/splash-shematters.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,14 +19,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./src/assets/images/favicon.png"
     },
     "plugins": ["expo-router"],
     "experiments": {
