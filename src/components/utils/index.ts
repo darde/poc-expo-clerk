@@ -17,3 +17,21 @@ export const tokenCache = {
     }
   },
 };
+
+export const Storage = {
+  async getItem(key: string) {
+    try {
+      return SecureStore.getItemAsync(key);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  async saveItem(key: string, value: string) {
+    console.log("key: ", key);
+    try {
+      return SecureStore.setItemAsync(key, value);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+};

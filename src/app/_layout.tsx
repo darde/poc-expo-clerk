@@ -9,7 +9,7 @@ import { useFonts } from "expo-font";
 import { Slot, SplashScreen, Stack, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
-import { tokenCache } from "../components/utils/auth";
+import { Storage, tokenCache } from "@/components/utils";
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 export {
@@ -59,12 +59,25 @@ const InitialLayout = () => {
     console.log({ isSignedIn });
     if (!isLoaded) return;
 
+    let publicRoute = "/welcome";
+
+    const checkWelcomeStep = async () => {
+      const gotWelcome = await Storage.getItem("GOT_WELCOME");
+      if (gotWelcome) {
+        // router.replace("/login"); // uncoment this after development
+        router.replace("/welcome"); // for development pourpose
+      } else {
+        await Storage.saveItem("GOT_WELCOME", "true");
+        router.replace("/welcome");
+      }
+    };
+
     const inTabsGroup = segments[0] === "(auth)";
 
     if (isSignedIn && !inTabsGroup) {
       router.replace("/home");
     } else if (!isSignedIn) {
-      router.replace("/login");
+      checkWelcomeStep();
     }
   }, [isSignedIn]);
 

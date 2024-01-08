@@ -11,7 +11,7 @@ import {
   Alert,
 } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
-import GoogleOAuth from "../../components/GoogleOAuth";
+import GoogleOAuth from "@/components/GoogleOAuth";
 
 const Login = () => {
   const { isLoaded, signIn, setActive } = useSignIn();
