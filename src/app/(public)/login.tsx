@@ -7,6 +7,7 @@ import { InputField, SMButton } from "@/components/shared";
 import Spinner from "react-native-loading-spinner-overlay";
 import GoogleOAuth from "@/components/GoogleOAuth";
 import AppleOAuth from "@/components/AppleOAuth";
+import OAuthLogin from "@/components/OAuthLogin";
 
 const Login = () => {
   const { isLoaded, signIn, setActive } = useSignIn();
@@ -71,8 +72,8 @@ const Login = () => {
       <View>
         <View style={styles.social}>
           <Text color="#6F7787">OR</Text>
-          <GoogleOAuth />
-          <AppleOAuth />
+          <OAuthLogin strategy="google" />
+          <OAuthLogin strategy="apple" />
         </View>
         <View style={styles.signup}>
           <Text style={{ color: "#6F7787", fontSize: 16, lineHeight: 34 }}>

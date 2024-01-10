@@ -9,7 +9,6 @@ export const tokenCache = {
     }
   },
   async saveToken(key: string, value: string) {
-    console.log("key: ", key);
     try {
       return SecureStore.setItemAsync(key, value);
     } catch (e) {
@@ -27,9 +26,15 @@ export const Storage = {
     }
   },
   async saveItem(key: string, value: string) {
-    console.log("key: ", key);
     try {
       return SecureStore.setItemAsync(key, value);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  async deleteItem(key: string) {
+    try {
+      return SecureStore.deleteItemAsync(key);
     } catch (e) {
       console.log(e);
     }

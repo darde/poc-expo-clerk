@@ -2,11 +2,14 @@ import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { Pressable } from "react-native";
 import { useAuth } from "@clerk/clerk-expo";
+import { Storage } from "@/components/utils";
 
 export const LogoutButton = () => {
   const { signOut } = useAuth();
 
-  const logout = () => {
+  const logout = async () => {
+    await Storage.deleteItem("GOT_WELCOME");
+
     signOut();
   };
 
