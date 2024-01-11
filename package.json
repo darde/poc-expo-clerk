@@ -20,6 +20,7 @@
     "@tamagui/config": "^1.83.0",
     "@tamagui/create-theme": "^1.83.0",
     "@tamagui/font-inter": "^1.83.0",
+    "@tamagui/lucide-icons": "^1.84.0",
     "@tamagui/shorthands": "^1.83.0",
     "@tamagui/themes": "^1.83.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",

@@ -1,8 +1,8 @@
-import { Tabs } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
-import { Pressable } from "react-native";
 import { useAuth } from "@clerk/clerk-expo";
+import { Stack } from "expo-router";
+import { Pressable } from "react-native";
 import { Storage } from "@/components/utils";
+import { Ionicons } from "@expo/vector-icons";
 
 export const LogoutButton = () => {
   const { signOut } = useAuth();
@@ -15,48 +15,24 @@ export const LogoutButton = () => {
 
   return (
     <Pressable onPress={logout} style={{ marginRight: 10 }}>
-      <Ionicons name="log-out-outline" size={24} color={"#fff"} />
+      <Ionicons name="log-out-outline" size={24} color={"#682D91"} />
     </Pressable>
   );
 };
 
-const TabsPage = () => {
-  const { isSignedIn } = useAuth();
-
+const ProtectedStack = () => {
   return (
-    <Tabs
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#6c47ff",
-        },
-        headerTintColor: "#fff",
-      }}
-    >
-      <Tabs.Screen
-        name="home"
+    <Stack>
+      <Stack.Screen
+        name="consent"
         options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home-outline" size={size} color={color} />
-          ),
-          tabBarLabel: "Home",
-        }}
-        redirect={!isSignedIn}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          headerTitle: "My Profile",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" size={size} color={color} />
-          ),
-          tabBarLabel: "My Profile",
+          headerTitle: "Consent",
+          headerTintColor: "#682D91",
           headerRight: () => <LogoutButton />,
         }}
-        redirect={!isSignedIn}
       />
-    </Tabs>
+    </Stack>
   );
 };
 
-export default TabsPage;
+export default ProtectedStack;

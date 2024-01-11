@@ -65,19 +65,19 @@ const InitialLayout = () => {
 
     const checkWelcomeStep = async () => {
       const gotWelcome = await Storage.getItem("GOT_WELCOME");
-      if (gotWelcome) {
-        router.replace("/login"); // uncoment this after development
-        // router.replace("/welcome"); // for development pourpose
-      } else {
-        await Storage.saveItem("GOT_WELCOME", "true");
-        router.replace("/welcome");
-      }
+      // if (gotWelcome) {
+      //   router.replace("/login");
+      // } else {
+      //   await Storage.saveItem("GOT_WELCOME", "true");
+      //   router.replace("/welcome");
+      // }
+      router.replace("/welcome");
     };
 
     const inTabsGroup = segments[0] === "(auth)";
 
     if (isSignedIn && !inTabsGroup) {
-      router.replace("/home");
+      router.replace("/consent");
     } else if (!isSignedIn) {
       checkWelcomeStep();
     }

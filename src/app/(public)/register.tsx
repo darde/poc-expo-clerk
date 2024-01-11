@@ -82,11 +82,16 @@ const register = () => {
       {!pendingVerification && (
         <View style={styles.form}>
           <View style={styles.fields}>
+            <Text style={styles.verifyHeader}>Register</Text>
+            <Text style={styles.verifySupportText}>
+              Please, provide a valid email and create a safe password.
+            </Text>
             <InputField
               placeholder="Type your best email"
               handleOnChange={setEmailAddress}
               value={emailAddress}
               label="Email"
+              labelColor="#682D91"
             />
             <InputField
               placeholder="Type a password"
@@ -94,6 +99,7 @@ const register = () => {
               value={password}
               label="Password"
               secureTextEntry
+              labelColor="#682D91"
             />
             <InputField
               placeholder="Repeat the password"
@@ -101,6 +107,7 @@ const register = () => {
               value={passwordVerification}
               label="Confirm the password"
               secureTextEntry
+              labelColor="#682D91"
             />
           </View>
           <View style={styles.bottom}>
@@ -109,7 +116,6 @@ const register = () => {
               // onPress={onSignUpPress}
               onPress={checkPasswordMatch}
               label="Sign up"
-              backgroundColor="#6D31ED"
               color="#fff"
             />
           </View>
@@ -117,14 +123,21 @@ const register = () => {
       )}
 
       {pendingVerification && (
-        <View>
-          <InputField
-            placeholder="Type your code"
-            handleOnChange={setCode}
-            value={code}
-            label="Verification code"
-          />
-          <SMLink label="Verify email" onPress={onPressVerify} />
+        <View style={styles.verifyContainer}>
+          <View style={styles.verifyTop}>
+            <Text style={styles.verifyHeader}>Please Verify</Text>
+            <Text style={styles.verifySupportText}>
+              Please, input the verification code you received by email, and
+              click <Text style={{ fontWeight: "bold" }}>Next</Text>.
+            </Text>
+            <InputField
+              placeholder="Type your code"
+              handleOnChange={setCode}
+              value={code}
+            />
+          </View>
+          {/* <SMLink label="Verify email" onPress={onPressVerify} /> */}
+          <SMButton label="Next" onPress={onPressVerify} />
         </View>
       )}
     </View>
@@ -134,17 +147,19 @@ const register = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    padding: 20,
+    justifyContent: "flex-start",
+    paddingLeft: 20,
+    paddingRight: 20,
     backgroundColor: "#fff",
   },
   fields: {
-    justifyContent: "flex-start",
-    gap: 18,
+    gap: 25,
   },
   form: {
-    justifyContent: "flex-start",
-    gap: 32,
+    flex: 1,
+    justifyContent: "space-between",
+    paddingTop: 60,
+    paddingBottom: 60,
   },
   error: {
     color: "#DB4437",
@@ -153,6 +168,29 @@ const styles = StyleSheet.create({
   bottom: {
     alignItems: "center",
     gap: 15,
+  },
+  verifyContainer: {
+    flex: 1,
+    justifyContent: "space-between",
+    paddingTop: 60,
+    paddingBottom: 60,
+    alignItems: "center",
+    width: "100%",
+  },
+  verifyTop: {
+    gap: 40,
+    alignItems: "center",
+    width: "100%",
+  },
+  verifyHeader: {
+    textAlign: "center",
+    color: "#682D91",
+    fontSize: 28,
+  },
+  verifySupportText: {
+    color: "#682D91",
+    fontSize: 14,
+    textAlign: "center",
   },
 });
 

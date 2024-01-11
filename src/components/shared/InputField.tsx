@@ -8,6 +8,8 @@ type InputFieldProps = {
   handleOnChange: Dispatch<SetStateAction<string>>;
   secureTextEntry?: boolean;
   label?: string;
+  labelColor?: string;
+  style?: Record<string, unknown>;
 };
 
 export const InputField = ({
@@ -16,10 +18,12 @@ export const InputField = ({
   handleOnChange,
   secureTextEntry = false,
   label,
+  labelColor = "#333",
+  style = {},
 }: InputFieldProps) => (
-  <YStack>
+  <YStack width="100%">
     {label && (
-      <Text color="#333" fontSize={16} pb={8} pl={4}>
+      <Text color={labelColor} fontSize={16} pb={8} pl={4}>
         {label}
       </Text>
     )}
@@ -34,6 +38,7 @@ export const InputField = ({
       backgroundColor="#F3F4F6"
       onChangeText={handleOnChange}
       secureTextEntry={secureTextEntry}
+      style={style}
     />
   </YStack>
 );
